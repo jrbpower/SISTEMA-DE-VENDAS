@@ -1,0 +1,95 @@
+unit Pedidos.Frame;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  Base.Frame, System.Rtti, FMX.Grid.Style, FMX.Edit, FMX.ScrollBox, FMX.Grid,
+  FMX.Layouts, System.Actions, FMX.ActnList, FMX.Controls.Presentation,
+  FMX.Objects, Data.DB, Data.Bind.Components, Data.Bind.DBScope,
+  Data.Bind.EngExt, Fmx.Bind.DBEngExt, Fmx.Bind.Grid, System.Bindings.Outputs,
+  Fmx.Bind.Editors, Data.Bind.Grid, FMX.ListView.Types,
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView;
+
+type
+  TframPedidos = class(TframBase)
+    lytGrid: TLayout;
+    lytProdutos: TLayout;
+    lytRodaPe: TLayout;
+    grdPedidos: TGrid;
+    lblCliente: TLabel;
+    edtCliente: TEdit;
+    DataSource1: TDataSource;
+    bndsrcdbGridProdutos: TBindSourceDB;
+    BindSourceDB1: TBindSourceDB;
+    bndngslstGridProdutos: TBindingsList;
+    lnkgrdtdtsrcbndsrcdbGridProdutos: TLinkGridToDataSource;
+    bndsrcdbGridCliente: TBindSourceDB;
+    lnkgrdtdtsrcbndsrcCliente: TLinkGridToDataSource;
+    lstvwCliente: TListView;
+    schbtnBuscarCliente: TSearchEditButton;
+    clrbtnApagarCliente: TClearEditButton;
+    lnkflcntrltfldIDCliente: TLinkFillControlToField;
+    btnNovoPedido: TButton;
+    btnCancelarPedido: TButton;
+    btnGravarPedido: TButton;
+    pthMoveAcima: TPath;
+    pthMoverBaixo: TPath;
+    procedure lstvwClienteItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
+    procedure FrameKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure FrameKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure edtClienteChangeTracking(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  framPedidos: TframPedidos;
+
+implementation
+
+uses
+  Pedidos.Data, Pedidos.Controlador;
+
+{$R *.fmx}
+
+procedure TframPedidos.edtClienteChangeTracking(Sender: TObject);
+begin
+  inherited;
+  if length(edtCliente.Text)> 3 then
+
+end;
+
+procedure TframPedidos.FrameKeyDown(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = PM_KEYUP then
+    bndsrcdbGridProdutos.datasource.dataset.prior;
+end;
+
+procedure TframPedidos.FrameKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = PM_KEYDOWN then
+    bndsrcdbGridProdutos.datasource.dataset.next;
+end;
+
+procedure TframPedidos.lstvwClienteItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  inherited;
+  edtCliente.Text := bndsrcdbGridCliente.DataSet.FieldByName('nome').AsString;
+  TPedidosControlador.GetInstance.DataModule.Cliente :=
+              bndsrcdbGridCliente.DataSet.FieldByName('cod_cliente').AsInteger;
+
+end;
+
+end.

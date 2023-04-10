@@ -1,0 +1,195 @@
+inherited framPedidos: TframPedidos
+  Size.Width = 1224.000000000000000000
+  OnKeyDown = FrameKeyDown
+  OnKeyUp = FrameKeyUp
+  inherited rctFormTotal: TRectangle
+    Size.Width = 1224.000000000000000000
+    inherited rctHeadTitulo: TRectangle
+      Size.Width = 1224.000000000000000000
+      inherited lblTituloHead: TLabel
+        Size.Width = 1224.000000000000000000
+        TextSettings.Font.StyleExt = {00090000000200000004000000}
+      end
+    end
+    object lytGrid: TLayout
+      Align = Left
+      Position.Y = 41.000000000000000000
+      Size.Width = 409.000000000000000000
+      Size.Height = 392.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object grdPedidos: TGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 409.000000000000000000
+        Size.Height = 392.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 409.000000000000000000
+        Viewport.Height = 392.000000000000000000
+      end
+    end
+    object lytRodaPe: TLayout
+      Align = Bottom
+      Position.Y = 433.000000000000000000
+      Size.Width = 1224.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+    object lytProdutos: TLayout
+      Align = Right
+      Position.X = 725.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 499.000000000000000000
+      Size.Height = 392.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object lblCliente: TLabel
+        Align = Scale
+        StyledSettings = [Family, Size, Style]
+        Position.X = 12.170731544494630000
+        Position.Y = 6.000000000000000000
+        Size.Width = 222.115844726562500000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.FontColor = claWhite
+        Text = 'Nome  do  Cliente'
+        TabOrder = 0
+      end
+      object edtCliente: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 1
+        Position.X = 8.000000000000000000
+        Position.Y = 24.000000000000000000
+        Size.Width = 433.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        OnChangeTracking = edtClienteChangeTracking
+        object schbtnBuscarCliente: TSearchEditButton
+          CanFocus = False
+          Cursor = crArrow
+          Size.Width = 28.000000000000000000
+          Size.Height = 18.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+        end
+        object clrbtnApagarCliente: TClearEditButton
+          CanFocus = False
+          Cursor = crArrow
+          Position.X = 28.000000000000000000
+          Size.Width = 28.000000000000000000
+          Size.Height = 18.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+        end
+      end
+      object lstvwCliente: TListView
+        ItemAppearanceClassName = 'TListItemAppearance'
+        ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        Position.X = 8.000000000000000000
+        Position.Y = 46.000000000000000000
+        Size.Width = 433.000000000000000000
+        Size.Height = 217.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        OnItemClick = lstvwClienteItemClick
+      end
+      object btnNovoPedido: TButton
+        Position.X = 16.000000000000000000
+        Position.Y = 360.000000000000000000
+        TabOrder = 5
+        Text = 'Novo Pedido'
+      end
+      object btnCancelarPedido: TButton
+        Position.X = 188.000000000000000000
+        Position.Y = 360.000000000000000000
+        Size.Width = 105.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Text = 'Cancelar Pedido'
+      end
+      object btnGravarPedido: TButton
+        Position.X = 360.000000000000000000
+        Position.Y = 360.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Text = 'Gravar Pedido'
+      end
+    end
+  end
+  object pthMoveAcima: TPath [2]
+    Position.X = 648.000000000000000000
+    Position.Y = 56.000000000000000000
+    Size.Width = 50.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object pthMoverBaixo: TPath [3]
+    Position.X = 648.000000000000000000
+    Position.Y = 136.000000000000000000
+    Size.Width = 50.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object DataSource1: TDataSource
+    Left = 528
+    Top = 233
+  end
+  object bndsrcdbGridProdutos: TBindSourceDB
+    DataSet = dtmdlPedidos.cdsItensPedido
+    ScopeMappings = <>
+    Left = 608
+    Top = 209
+  end
+  object BindSourceDB1: TBindSourceDB
+    ScopeMappings = <>
+    Left = 472
+    Top = 225
+  end
+  object bndngslstGridProdutos: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object lnkgrdtdtsrcbndsrcdbGridProdutos: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdbGridProdutos
+      GridControl = grdPedidos
+      Columns = <
+        item
+          MemberName = 'cod_produto'
+          Header = 'Codigo'
+        end
+        item
+          MemberName = 'descricao'
+          Header = 'Descri'#231#227'o'
+          TextWidth = 40
+        end>
+    end
+    object lnkflcntrltfldIDCliente: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = lstvwCliente
+      Track = True
+      FillDataSource = bndsrcdbGridCliente
+      FillValueFieldName = 'cod_cliente'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'nome'
+      FillBreakGroups = <>
+    end
+  end
+  object bndsrcdbGridCliente: TBindSourceDB
+    DataSet = dtmdlPedidos.fdqryCliente
+    ScopeMappings = <>
+    Left = 504
+    Top = 224
+  end
+end

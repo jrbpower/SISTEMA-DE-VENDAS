@@ -1,0 +1,514 @@
+inherited framPedidos: TframPedidos
+  Size.Width = 1196.000000000000000000
+  Size.Height = 485.000000000000000000
+  OnKeyDown = FrameKeyDown
+  OnKeyUp = FrameKeyUp
+  OnEnter = FrameEnter
+  inherited rctFormTotal: TRectangle
+    Size.Width = 1196.000000000000000000
+    Size.Height = 485.000000000000000000
+    inherited rctHeadTitulo: TRectangle
+      Size.Width = 1196.000000000000000000
+      inherited lblTituloHead: TLabel
+        Size.Width = 1196.000000000000000000
+        TextSettings.Font.StyleExt = {00090000000200000004000000}
+      end
+      inherited pthSair: TPath
+        Position.X = 1148.000000000000000000
+      end
+    end
+    object lytGrid: TLayout
+      Align = Left
+      Position.Y = 13.000000000000000000
+      Size.Width = 545.000000000000000000
+      Size.Height = 422.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object grdPedidos: TGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 545.000000000000000000
+        Size.Height = 422.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        RowCount = 0
+        Viewport.Width = 541.000000000000000000
+        Viewport.Height = 397.000000000000000000
+      end
+    end
+    object lytRodaPe: TLayout
+      Align = Bottom
+      Position.Y = 435.000000000000000000
+      Size.Width = 1196.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object lytTotal: TLayout
+        Align = Left
+        Size.Width = 625.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object lblTotal: TLabel
+          Align = MostRight
+          StyledSettings = [Family]
+          Position.X = 488.000000000000000000
+          Size.Width = 137.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 28.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claChartreuse
+          Text = '0,00'
+          TabOrder = 0
+        end
+        object lblValorTotal: TLabel
+          Align = Right
+          StyledSettings = [Family]
+          Position.X = 408.000000000000000000
+          Size.Width = 80.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 28.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          Text = 'Total:'
+          TabOrder = 1
+        end
+      end
+    end
+    object lytProdutos: TLayout
+      Align = Left
+      Position.X = 545.000000000000000000
+      Position.Y = 13.000000000000000000
+      Size.Width = 480.000000000000000000
+      Size.Height = 422.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object lblCliente: TLabel
+        Align = Scale
+        StyledSettings = [Family]
+        Position.X = 15.000000000000000000
+        Position.Y = 6.000000000000000000
+        Size.Width = 213.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        Text = 'Nome  do  Cliente'
+        TabOrder = 0
+      end
+      object edtCliente: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Scale
+        TabOrder = 1
+        Position.X = 15.000000000000000000
+        Position.Y = 26.000000000000000000
+        Size.Width = 416.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        object schbtnBuscarCliente: TSearchEditButton
+          CanFocus = False
+          Cursor = crArrow
+          Size.Width = 28.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Visible = False
+        end
+        object clrbtnApagarCliente: TClearEditButton
+          CanFocus = False
+          Cursor = crArrow
+          Position.X = 28.000000000000000000
+          Size.Width = 28.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          OnClick = clrbtnApagarClienteClick
+        end
+        object schbtnBuscarClient: TSearchEditButton
+          CanFocus = False
+          Cursor = crArrow
+          Size.Width = 28.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          OnClick = schbtnBuscarClientClick
+        end
+      end
+      object btnNovoPedido: TButton
+        Action = actNovo
+        Align = Scale
+        Enabled = True
+        ImageIndex = -1
+        Position.X = 15.000000000000000000
+        Position.Y = 131.000000000000000000
+        Size.Width = 77.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+      end
+      object btnCancelarPedido: TButton
+        Action = actCancelar
+        Align = Scale
+        Enabled = True
+        ImageIndex = -1
+        Position.X = 180.841690063476600000
+        Position.Y = 130.619049072265600000
+        Size.Width = 76.953903198242190000
+        Size.Height = 23.109527587890630000
+        Size.PlatformDefault = False
+        TabOrder = 3
+      end
+      object btnGravarPedido: TButton
+        Action = actSalvar
+        Align = Scale
+        Enabled = True
+        ImageIndex = -1
+        Position.X = 354.000000000000000000
+        Position.Y = 131.000000000000000000
+        Size.Width = 77.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+      end
+      object edtcodProduto: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Scale
+        TabOrder = 7
+        Position.X = 15.000000000000000000
+        Position.Y = 81.000000000000000000
+        Size.Width = 96.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        OnEnter = edtcodProdutoEnter
+        OnExit = edtcodProdutoExit
+        object schbtnBuscarProd: TSearchEditButton
+          CanFocus = False
+          Cursor = crArrow
+          Size.Width = 28.000000000000000000
+          Size.Height = 21.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          OnClick = schbtnBuscarProdClick
+        end
+      end
+      object edtQtd: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Scale
+        TabOrder = 6
+        Position.X = 115.430862426757800000
+        Position.Y = 81.385711669921880000
+        Size.Width = 96.192398071289060000
+        Size.Height = 24.114288330078130000
+        Size.PlatformDefault = False
+        OnChange = edtQtdChange
+        OnEnter = edtQtdEnter
+        OnExit = edtQtdExit
+      end
+      object edtValorUnit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Scale
+        TabOrder = 5
+        Position.X = 223.166336059570300000
+        Position.Y = 81.385711669921880000
+        Size.Width = 96.192367553710940000
+        Size.Height = 24.114288330078130000
+        Size.PlatformDefault = False
+      end
+      object btnInserirPedidos: TButton
+        Action = actAdcionar
+        Align = Scale
+        Enabled = True
+        ImageIndex = -1
+        Position.X = 331.000000000000000000
+        Position.Y = 81.000000000000000000
+        Size.Width = 101.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+      end
+      object lblCodProduto: TLabel
+        Align = Scale
+        StyledSettings = [Family]
+        Position.X = 15.000000000000000000
+        Position.Y = 62.000000000000000000
+        Size.Width = 93.000000000000000000
+        Size.Height = 18.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        Text = 'Cod / Desc'
+        TabOrder = 9
+      end
+      object lblQuantidade: TLabel
+        Align = Scale
+        StyledSettings = [Family]
+        Position.X = 115.430862426757800000
+        Position.Y = 62.295238494873050000
+        Size.Width = 93.306625366210940000
+        Size.Height = 18.085712432861330000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        Text = 'Quantidade'
+        TabOrder = 10
+      end
+      object lblValorUnit: TLabel
+        Align = Scale
+        StyledSettings = [Family]
+        Position.X = 223.166336059570300000
+        Position.Y = 62.295238494873050000
+        Size.Width = 93.306594848632810000
+        Size.Height = 18.085712432861330000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        Text = 'Pre'#231'o'
+        TabOrder = 11
+      end
+      object popCliente: TPopup
+        Align = Scale
+        PlacementTarget = edtCliente
+        Position.X = 8.000000000000000000
+        Position.Y = 82.000000000000000000
+        Size.Width = 457.000000000000000000
+        Size.Height = 120.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 12
+        object lstbxCliente: TListBox
+          Align = Contents
+          Size.Width = 457.000000000000000000
+          Size.Height = 120.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          DisableFocusEffect = True
+          DefaultItemStyles.ItemStyle = ''
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          OnItemClick = lstbxClienteItemClick
+          Viewport.Width = 457.000000000000000000
+          Viewport.Height = 120.000000000000000000
+        end
+      end
+      object popProdutos: TPopup
+        Align = Scale
+        PlacementTarget = edtcodProduto
+        Position.X = 8.000000000000000000
+        Position.Y = 175.000000000000000000
+        Size.Width = 449.000000000000000000
+        Size.Height = 127.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 13
+        object lstbxProdutos: TListBox
+          Align = Contents
+          Size.Width = 449.000000000000000000
+          Size.Height = 127.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          DisableFocusEffect = True
+          DefaultItemStyles.ItemStyle = ''
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          OnItemClick = lstbxProdutosItemClick
+          Viewport.Width = 449.000000000000000000
+          Viewport.Height = 127.000000000000000000
+        end
+      end
+      object lblCodCliente: TLabel
+        Position.X = 128.000000000000000000
+        Position.Y = 248.000000000000000000
+        Text = 'lblCodCliente'
+        Visible = False
+        TabOrder = 14
+      end
+      object lblIDProduto: TLabel
+        Position.X = 336.000000000000000000
+        Position.Y = 256.000000000000000000
+        Text = 'lblIDProduto'
+        Visible = False
+        TabOrder = 15
+      end
+    end
+    object lytCursorGrid: TLayout
+      Align = Left
+      Position.X = 1025.000000000000000000
+      Position.Y = 13.000000000000000000
+      Size.Width = 96.000000000000000000
+      Size.Height = 422.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      object pthMoveAcima: TPath
+        Align = Top
+        Data.Path = {
+          2000000000000000CD4CBB439A997643020000003333B84366E67C4302000000
+          9A19B44300008043020000000000B043000080430200000066E6AB4300008043
+          020000005CCFA74300E07C4302000000A4B0A44300A076430100000000006043
+          CD4C0D4301000000000060430000E043020000000000604352D8E84302000000
+          85AB5143CD8CEF430200000066E64043CD8CEF430200000047213043CD8CEF43
+          02000000000020439AD9E84302000000000020430000E0430100000000002043
+          CD4C0D43010000001F855A429A997643020000001F852842CD8C814302000000
+          3E0AAF41CD8C8143020000007C1416419A9976430200000010AE47C09A196A43
+          0200000010AE47C09AD95543020000007C1416419A5949430100000048612943
+          686625420200000048E13543D0CCE6410200000048214A43D0CCE64102000000
+          48A156436866254201000000A450BB439A59494302000000CD8CC14366E65543
+          02000000CD8CC1439A196A4302000000CD4CBB439A99764303000000CD4CBB43
+          9A997643}
+        Size.Width = 96.000000000000000000
+        Size.Height = 92.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = pthMoveAcimaClick
+      end
+      object pthMoverBaixo: TPath
+        Align = Bottom
+        Data.Path = {
+          2000000000000000CD4CBB43CD4C9B43010000009A995643CD4CEB4302000000
+          666650433373EE4302000000333348430000F04302000000000040430000F043
+          02000000CDCC37430000F04302000000B89E2F430070EE430200000048612943
+          0050EB43010000008014164100509B430200000000AE47C00010954302000000
+          00AE47C000F08A43020000008014164100B0844302000000400AAF4100E07C43
+          020000002085284200E07C430200000020855A4200B084430100000000002043
+          6666B9430100000000002043000080420200000000002043703D394202000000
+          7B542E439A990342020000009A193F439A99034202000000B9DE4F439A990342
+          0200000000006043713D39420200000000006043000080420100000000006043
+          6666B9430100000033B3A44333B384430200000033F3AA4366E67C4302000000
+          3313B54366E67C43020000003353BB4333B38443020000003393C14333F38A43
+          02000000CD8CC143CD0C954302000000CD4CBB43CD4C9B4303000000CD4CBB43
+          CD4C9B43}
+        Position.Y = 330.000000000000000000
+        Size.Width = 96.000000000000000000
+        Size.Height = 92.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = pthMoverBaixoClick
+      end
+    end
+  end
+  inherited actnlstBase: TActionList
+    object actNovo: TAction
+      Text = 'Novo Pedido'
+      OnExecute = actNovoExecute
+    end
+    object actCancelar: TAction
+      Text = 'Cancelar'
+      OnExecute = actCancelarExecute
+    end
+    object actSalvar: TAction
+      Text = 'Gravar'
+      OnExecute = actSalvarExecute
+    end
+    object actAdcionar: TAction
+      Text = 'Adcionar Produto'
+      OnExecute = actAdcionarExecute
+    end
+  end
+  object bndsrcdbGridProdutos: TBindSourceDB
+    DataSet = dtmdlPedidos.fdqryProdutosGrid
+    ScopeMappings = <>
+    Left = 672
+    Top = 209
+  end
+  object bndngslstGridProdutos: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 668
+    Top = 325
+    object lnkgrdtdtsrcbndsrcdbGridProdutos: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bndsrcdbGridProdutos
+      GridControl = grdPedidos
+      Columns = <
+        item
+          MemberName = 'cod_produto'
+          Header = 'Codigo'
+          TextWidth = 8
+        end
+        item
+          MemberName = 'descricao'
+          Header = 'Descri'#231#227'o'
+          TextWidth = 40
+        end
+        item
+          MemberName = 'quantidade'
+          Header = 'Qtd.'
+          TextWidth = 10
+        end
+        item
+          MemberName = 'valor_unit'
+          Header = 'Valor Unit.'
+          TextWidth = 10
+        end
+        item
+          MemberName = 'valor_total'
+          Header = 'Total'
+          TextWidth = 10
+        end>
+    end
+    object lnkflcntrltfldIDCliente: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Track = True
+      FillDataSource = bndsrcdbGridCliente
+      FillValueFieldName = 'cod_cliente'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'nome'
+      FillBreakGroups = <>
+    end
+    object lnkflcntrltfldProdutos: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Track = True
+      FillDataSource = bndsrcdbLSTProdutos
+      FillValueFieldName = 'cod_produto'
+      FillDisplayFieldName = 'descricao'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object lnkctlprpTextIDCliente: TLinkFillControlToProperty
+      Category = 'Quick Bindings'
+      Track = True
+      Control = lstbxCliente
+      Component = lblCodCliente
+      ComponentProperty = 'Text'
+      FillDataSource = bndsrcdbGridCliente
+      FillValueFieldName = 'cod_cliente'
+      FillDisplayFieldName = 'nome'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object lnkctlprpIDProdutos: TLinkFillControlToProperty
+      Category = 'Quick Bindings'
+      Track = True
+      Control = lstbxProdutos
+      Component = lblIDProduto
+      ComponentProperty = 'Text'
+      FillDataSource = bndsrcdbLSTProdutos
+      FillValueFieldName = 'cod_produto'
+      FillDisplayFieldName = 'descricao'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+  object bndsrcdbGridCliente: TBindSourceDB
+    DataSet = dtmdlPedidos.fdqryCliente
+    ScopeMappings = <>
+    Left = 672
+    Top = 384
+  end
+  object bndsrcdbLSTProdutos: TBindSourceDB
+    DataSet = dtmdlPedidos.fdqryProdutos
+    ScopeMappings = <>
+    Left = 672
+    Top = 264
+  end
+end

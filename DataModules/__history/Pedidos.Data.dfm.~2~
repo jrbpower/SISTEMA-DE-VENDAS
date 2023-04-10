@@ -1,0 +1,295 @@
+inherited dtmdlPedidos: TdtmdlPedidos
+  OldCreateOrder = True
+  Height = 523
+  Width = 923
+  object fdqryCliente: TFDQuery
+    CachedUpdates = True
+    Connection = dtmdlConexaoLocal.conSistemaVendas
+    SQL.Strings = (
+      'select * from clientes'
+      'where nome like :nome')
+    Left = 24
+    Top = 8
+    ParamData = <
+      item
+        Name = 'NOME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+    object fdqryClientecod_cliente: TIntegerField
+      FieldName = 'cod_cliente'
+      Origin = 'cod_cliente'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdqryClientenome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nome'
+      Origin = 'nome'
+      Size = 250
+    end
+    object fdqryClientecidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cidade'
+      Origin = 'cidade'
+      Size = 150
+    end
+    object fdqryClienteuf: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'uf'
+      Origin = 'uf'
+      Size = 10
+    end
+  end
+  object fdqryProdutos: TFDQuery
+    CachedUpdates = True
+    Connection = dtmdlConexaoLocal.conSistemaVendas
+    SQL.Strings = (
+      'SELECT * FROM PRODUTOS')
+    Left = 112
+    Top = 8
+    object fdqryProdutoscod_produto: TIntegerField
+      FieldName = 'cod_produto'
+      Origin = 'cod_produto'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdqryProdutosdescricao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Size = 255
+    end
+    object fdqryProdutospreco_venda: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'preco_venda'
+      Origin = 'preco_venda'
+      Precision = 20
+      Size = 0
+    end
+  end
+  object fdqryPedidos: TFDQuery
+    BeforePost = fdqryPedidosBeforePost
+    CachedUpdates = True
+    Connection = dtmdlConexaoLocal.conSistemaVendas
+    SQL.Strings = (
+      'select '
+      '  cod_nu_pedido, '
+      '  data_emissao, '
+      '  cod_cliente, '
+      '  vl_total '
+      'from pedidos')
+    Left = 64
+    Top = 207
+    object fdqryPedidoscod_nu_pedido: TIntegerField
+      FieldName = 'cod_nu_pedido'
+      Required = True
+    end
+    object fdqryPedidosdata_emissao: TDateTimeField
+      FieldName = 'data_emissao'
+    end
+    object fdqryPedidoscod_cliente: TIntegerField
+      FieldName = 'cod_cliente'
+      Required = True
+    end
+    object fdqryPedidosvl_total: TFloatField
+      FieldName = 'vl_total'
+    end
+  end
+  object dspCliente: TDataSetProvider
+    DataSet = fdqryCliente
+    Left = 24
+    Top = 64
+  end
+  object dspProdutos: TDataSetProvider
+    DataSet = fdqryProdutos
+    Left = 112
+    Top = 64
+  end
+  object dspPedidos: TDataSetProvider
+    DataSet = fdqryPedidos
+    Left = 64
+    Top = 264
+  end
+  object fdqryItensPedido: TFDQuery
+    CachedUpdates = True
+    MasterSource = dsPedidos
+    MasterFields = 'cod_nu_pedido'
+    DetailFields = 'cod_nu_pedido'
+    Connection = dtmdlConexaoLocal.conSistemaVendas
+    FetchOptions.AssignedValues = [evCache]
+    FetchOptions.Cache = [fiBlobs, fiMeta]
+    SQL.Strings = (
+      'SELECT '
+      '  PP.cod_pedido_produto,'
+      '  PP.cod_nu_pedido,'
+      '  PP.cod_produto,'
+      '  PP.quantidade,'
+      '  PP.valor_unit,'
+      '  PP.valor_total,'
+      '  P.descricao'
+      'FROM PRODUTOS_PEDIDOS PP'
+      'LEFT JOIN PRODUTOS P ON P.COD_PRODUTO = PP.COD_PRODUTO'
+      '   WHERE '
+      '      cod_nu_pedido = :COD_NU_PEDIDO')
+    Left = 272
+    Top = 208
+    ParamData = <
+      item
+        Position = 1
+        Name = 'COD_NU_PEDIDO'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+    object fdqryItensPedidocod_pedido_produto: TFDAutoIncField
+      FieldName = 'cod_pedido_produto'
+      Origin = 'cod_pedido_produto'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object fdqryItensPedidocod_nu_pedido: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'cod_nu_pedido'
+      Origin = 'cod_nu_pedido'
+    end
+    object fdqryItensPedidocod_produto: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'cod_produto'
+      Origin = 'cod_produto'
+    end
+    object fdqryItensPedidoquantidade: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'quantidade'
+      Origin = 'quantidade'
+      Precision = 50
+      Size = 0
+    end
+    object fdqryItensPedidovalor_unit: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'valor_unit'
+      Origin = 'valor_unit'
+      Precision = 50
+      Size = 0
+    end
+    object fdqryItensPedidovalor_total: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'valor_total'
+      Origin = 'valor_total'
+      Precision = 50
+      Size = 0
+    end
+    object fdqryItensPedidodescricao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 255
+    end
+  end
+  object dsPedidos: TDataSource
+    DataSet = fdqryPedidos
+    Left = 168
+    Top = 264
+  end
+  object cdsPedidos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspPedidos'
+    Left = 64
+    Top = 320
+    object cdsPedidoscod_nu_pedido: TIntegerField
+      FieldName = 'cod_nu_pedido'
+      Required = True
+    end
+    object cdsPedidosdata_emissao: TDateTimeField
+      FieldName = 'data_emissao'
+    end
+    object cdsPedidoscod_cliente: TIntegerField
+      FieldName = 'cod_cliente'
+      Required = True
+    end
+    object cdsPedidosvl_total: TFloatField
+      FieldName = 'vl_total'
+    end
+    object cdsPedidoscdsItensPedido: TDataSetField
+      FieldName = 'cdsItensPedido'
+    end
+  end
+  object dspItensPedido: TDataSetProvider
+    DataSet = fdqryItensPedido
+    Left = 272
+    Top = 264
+  end
+  object cdsItensPedido: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'cod_nu_pedido'
+    MasterFields = 'cod_nu_pedido'
+    MasterSource = dsPedidos
+    PacketRecords = 0
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'COD_NU_PEDIDO'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspItensPedido'
+    Left = 272
+    Top = 320
+    object cdsItensPedidocod_pedido_produto: TAutoIncField
+      FieldName = 'cod_pedido_produto'
+      ReadOnly = True
+    end
+    object cdsItensPedidocod_nu_pedido: TIntegerField
+      FieldName = 'cod_nu_pedido'
+    end
+    object cdsItensPedidocod_produto: TIntegerField
+      FieldName = 'cod_produto'
+    end
+    object cdsItensPedidoquantidade: TFMTBCDField
+      FieldName = 'quantidade'
+      Precision = 50
+      Size = 0
+    end
+    object cdsItensPedidovalor_unit: TFMTBCDField
+      FieldName = 'valor_unit'
+      Precision = 50
+      Size = 0
+    end
+    object cdsItensPedidovalor_total: TFMTBCDField
+      FieldName = 'valor_total'
+      Precision = 50
+      Size = 0
+    end
+    object cdsItensPedidodescricao: TStringField
+      FieldName = 'descricao'
+      ReadOnly = True
+      Size = 255
+    end
+  end
+  object dsItensPedido: TDataSource
+    DataSet = fdqryItensPedido
+    Left = 368
+    Top = 264
+  end
+  object fdmtCache: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 464
+    Top = 208
+  end
+  object dsCache: TDataSource
+    DataSet = fdmtCache
+    Left = 464
+    Top = 264
+  end
+  object fdsAdapter: TFDSchemaAdapter
+    Left = 584
+    Top = 208
+  end
+end

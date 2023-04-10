@@ -1,0 +1,202 @@
+unit Pedidos.Data;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Base.Data, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.Client, Datasnap.DBClient, Datasnap.Provider,
+  FireDAC.Comp.DataSet;
+
+type
+  TdtmdlPedidos = class(TdtmdlBase)
+    fdqryCliente: TFDQuery;
+    fdqryProdutos: TFDQuery;
+    fdqryPedidos: TFDQuery;
+    dspCliente: TDataSetProvider;
+    dspProdutos: TDataSetProvider;
+    dspPedidos: TDataSetProvider;
+    fdqryItensPedido: TFDQuery;
+    dsPedidos: TDataSource;
+    cdsPedidos: TClientDataSet;
+    dspItensPedido: TDataSetProvider;
+    cdsItensPedido: TClientDataSet;
+    dsItensPedido: TDataSource;
+    fdmtCache: TFDMemTable;
+    dsCache: TDataSource;
+    fdsAdapter: TFDSchemaAdapter;
+    fdqryProdutoscod_produto: TIntegerField;
+    fdqryProdutosdescricao: TStringField;
+    fdqryProdutospreco_venda: TFMTBCDField;
+    fdqryClientecod_cliente: TIntegerField;
+    fdqryClientenome: TStringField;
+    fdqryClientecidade: TStringField;
+    fdqryClienteuf: TStringField;
+    cdsPedidoscod_nu_pedido: TIntegerField;
+    cdsPedidosdata_emissao: TDateTimeField;
+    cdsPedidoscod_cliente: TIntegerField;
+    cdsPedidosvl_total: TFloatField;
+    cdsPedidoscdsItensPedido: TDataSetField;
+    fdqryItensPedidocod_pedido_produto: TFDAutoIncField;
+    fdqryItensPedidocod_nu_pedido: TIntegerField;
+    fdqryItensPedidocod_produto: TIntegerField;
+    fdqryItensPedidoquantidade: TFMTBCDField;
+    fdqryItensPedidovalor_unit: TFMTBCDField;
+    fdqryItensPedidovalor_total: TFMTBCDField;
+    fdqryItensPedidodescricao: TStringField;
+    cdsItensPedidocod_pedido_produto: TAutoIncField;
+    cdsItensPedidocod_nu_pedido: TIntegerField;
+    cdsItensPedidocod_produto: TIntegerField;
+    cdsItensPedidoquantidade: TFMTBCDField;
+    cdsItensPedidovalor_unit: TFMTBCDField;
+    cdsItensPedidovalor_total: TFMTBCDField;
+    cdsItensPedidodescricao: TStringField;
+    fdqryPedidoscod_nu_pedido: TIntegerField;
+    fdqryPedidosdata_emissao: TDateTimeField;
+    fdqryPedidoscod_cliente: TIntegerField;
+    fdqryPedidosvl_total: TFMTBCDField;
+    procedure fdqryPedidosBeforePost(DataSet: TDataSet);
+  private
+    FCliente: Integer;
+    FValorUnit: Currency;
+    FCodigoProduto: Integer;
+    FQuantidade: Double;
+    FNumPedido: Integer;
+    FTotalPedido: Double;
+    procedure SetCliente(const Value: Integer);
+    procedure SetCodigoProduto(const Value: Integer);
+    procedure SetQuantidade(const Value: Double);
+    procedure SetValorUnit(const Value: Currency);
+    procedure SetNumPedido(const Value: Integer);
+    procedure SetTotalPedido(const Value: Double);
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure InserirPedido;
+    procedure InserirProdutos;
+    procedure GravarPedido;
+    procedure CancelarPedido;
+    procedure BuscarCliente(Nome:string);
+    procedure BuscarValorTotal;
+    property Cliente: Integer read FCliente write SetCliente;
+    property CodigoProduto:Integer read FCodigoProduto write SetCodigoProduto;
+    property Quantidade: Double read FQuantidade write SetQuantidade;
+    property ValorUnit: Currency read FValorUnit write SetValorUnit;
+    property NumPedido:Integer read FNumPedido write SetNumPedido;
+    property TotalPedido:Double read FTotalPedido write SetTotalPedido;
+
+  end;
+
+var
+  dtmdlPedidos: TdtmdlPedidos;
+
+implementation
+
+uses
+  ConexaoLocal.Data;
+
+{%CLASSGROUP 'FMX.Controls.TControl'}
+
+{$R *.dfm}
+
+{ TdtmdlPedidos }
+
+procedure TdtmdlPedidos.BuscarCliente(Nome: string);
+begin
+  fdqryCliente.Close;
+  fdqryCliente.ParamByName('nome').AsString := '%'+UpperCase(Nome)+'%';
+  fdqryCliente.Open;
+end;
+
+procedure TdtmdlPedidos.BuscarValorTotal;
+var
+  ValorTotal : Double;
+begin
+  fdqryItensPedido.Close;
+  fdqryItensPedido.ParamByName('cod_nu_pedido').AsInteger := NumPedido;
+  fdqryItensPedido.Open;
+  fdqryItensPedido.First;
+  while not fdqryItensPedido.Eof do
+  begin
+    ValorTotal := fdqryItensPedidovalor_unit.AsFloat *
+                                            fdqryItensPedidoquantidade.AsFloat;
+    fdqryItensPedido.Next;
+  end;
+end;
+
+procedure TdtmdlPedidos.CancelarPedido;
+begin
+  fdqryItensPedido.Cancel;
+  fdqryPedidos.Cancel;
+end;
+
+procedure TdtmdlPedidos.fdqryPedidosBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+  fdqryPedidoscod_cliente.AsInteger := Cliente;
+end;
+
+procedure TdtmdlPedidos.GravarPedido;
+begin
+  fdqryPedidos.Post;
+  fdqryPedidos.ApplyUpdates(0);
+end;
+
+procedure TdtmdlPedidos.InserirPedido;
+begin
+  fdqryPedidos.Close;
+  fdqryPedidos.Open;
+  fdqryPedidos.Last;
+  NumPedido := fdqryPedidoscod_nu_pedido.AsInteger;
+  fdqryPedidos.Insert;
+  fdqryPedidoscod_nu_pedido.AsInteger := NumPedido+1;
+  fdqryPedidosdata_emissao.AsDateTime := Now;
+end;
+
+procedure TdtmdlPedidos.InserirProdutos;
+begin
+  if not (fdqryItensPedido.State in dsEditModes) then
+    fdqryItensPedido.Edit;
+
+  fdqryItensPedidocod_produto.AsInteger := CodigoProduto;
+  fdqryItensPedidoquantidade.AsFloat := Quantidade;
+  fdqryItensPedidovalor_unit.AsFloat := ValorUnit;
+  fdqryItensPedidovalor_total.AsFloat := ValorUnit * Quantidade;
+  fdqryPedidosvl_total.AsFloat :=  fdqryPedidosvl_total.AsFloat +
+                                            fdqryItensPedidovalor_total.AsFloat;
+  TotalPedido := fdqryPedidosvl_total.AsFloat;
+  fdqryItensPedido.Post;
+end;
+
+procedure TdtmdlPedidos.SetCliente(const Value: Integer);
+begin
+  FCliente := Value;
+end;
+
+procedure TdtmdlPedidos.SetCodigoProduto(const Value: Integer);
+begin
+  FCodigoProduto := Value;
+end;
+
+procedure TdtmdlPedidos.SetNumPedido(const Value: Integer);
+begin
+  FNumPedido := Value;
+end;
+
+procedure TdtmdlPedidos.SetQuantidade(const Value: Double);
+begin
+  FQuantidade := Value;
+end;
+
+procedure TdtmdlPedidos.SetTotalPedido(const Value: Double);
+begin
+  FTotalPedido := Value;
+end;
+
+procedure TdtmdlPedidos.SetValorUnit(const Value: Currency);
+begin
+  FValorUnit := Value;
+end;
+
+end.

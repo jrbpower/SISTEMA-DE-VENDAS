@@ -1,0 +1,22 @@
+inherited dtmdlConexaoLocal: TdtmdlConexaoLocal
+  object conSistemaVendas: TFDConnection
+    Params.Strings = (
+      'Database=sistemavendas'
+      'User_Name=root'
+      'Server=localhost'
+      'Password=v2@c1!c2@C3#'
+      'DriverID=MySQL')
+    LoginPrompt = False
+    Left = 48
+    Top = 16
+  end
+  object FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink
+    Left = 48
+    Top = 72
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'FMX'
+    Left = 48
+    Top = 136
+  end
+end

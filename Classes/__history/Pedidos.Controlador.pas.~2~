@@ -1,0 +1,14 @@
+unit Pedidos.Controlador;
+
+interface
+
+uses
+  Controlador.Frame, TelaPedido.Frame;
+
+ type TTelaPedidosControlador  = Class(TControlador<>)
+
+implementation
+
+
+
+end.

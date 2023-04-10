@@ -1,0 +1,245 @@
+unit Pedidos.Frame;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  Base.Frame, System.Rtti, FMX.Grid.Style, FMX.Edit, FMX.ScrollBox, FMX.Grid,
+  FMX.Layouts, System.Actions, FMX.ActnList, FMX.Controls.Presentation,
+  FMX.Objects, Data.DB, Data.Bind.Components, Data.Bind.DBScope,
+  Data.Bind.EngExt, Fmx.Bind.DBEngExt, Fmx.Bind.Grid, System.Bindings.Outputs,
+  Fmx.Bind.Editors, Data.Bind.Grid, FMX.ListView.Types,
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView;
+
+type
+  TframPedidos = class(TframBase)
+    lytGrid: TLayout;
+    lytProdutos: TLayout;
+    lytRodaPe: TLayout;
+    grdPedidos: TGrid;
+    lblCliente: TLabel;
+    edtCliente: TEdit;
+    bndsrcdbGridProdutos: TBindSourceDB;
+    bndngslstGridProdutos: TBindingsList;
+    lnkgrdtdtsrcbndsrcdbGridProdutos: TLinkGridToDataSource;
+    bndsrcdbGridCliente: TBindSourceDB;
+    lstvwCliente: TListView;
+    schbtnBuscarCliente: TSearchEditButton;
+    clrbtnApagarCliente: TClearEditButton;
+    lnkflcntrltfldIDCliente: TLinkFillControlToField;
+    btnNovoPedido: TButton;
+    btnCancelarPedido: TButton;
+    btnGravarPedido: TButton;
+    pthMoveAcima: TPath;
+    pthMoverBaixo: TPath;
+    edtcodProduto: TEdit;
+    edtQtd: TEdit;
+    edtValorUnit: TEdit;
+    btnInserirPedidos: TButton;
+    lblCodProduto: TLabel;
+    lblQuantidade: TLabel;
+    lblValorUnit: TLabel;
+    lstvwProdutos: TListView;
+    bndsrcdbLSTProdutos: TBindSourceDB;
+    lnkflcntrltfldProdutos: TLinkFillControlToField;
+    actNovo: TAction;
+    actCancelar: TAction;
+    actSalvar: TAction;
+    actAdcionar: TAction;
+    lblValorTotal: TLabel;
+    lblTotal: TLabel;
+    popCliente: TPopup;
+    popProdutos: TPopup;
+    lytCursorGrid: TLayout;
+    procedure lstvwClienteItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
+    procedure FrameKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure FrameKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure lstvwProdutosItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
+    procedure actNovoExecute(Sender: TObject);
+    procedure actAdcionarExecute(Sender: TObject);
+    procedure actCancelarExecute(Sender: TObject);
+    procedure actSalvarExecute(Sender: TObject);
+    procedure edtcodProdutoExit(Sender: TObject);
+    procedure edtcodProdutoEnter(Sender: TObject);
+    procedure edtQtdEnter(Sender: TObject);
+    procedure edtQtdExit(Sender: TObject);
+    procedure edtValorUnitEnter(Sender: TObject);
+    procedure clrbtnApagarClienteClick(Sender: TObject);
+    procedure pthMoveAcimaClick(Sender: TObject);
+    procedure pthMoverBaixoClick(Sender: TObject);
+    procedure Desabilitar;
+    procedure edtcodProdutoChangeTracking(Sender: TObject);
+    procedure edtClienteChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    constructor Create(AOwner: TComponent); override;
+  end;
+
+var
+  framPedidos: TframPedidos;
+
+implementation
+
+uses
+  Pedidos.Data, Pedidos.Controlador;
+
+{$R *.fmx}
+
+procedure TframPedidos.actAdcionarExecute(Sender: TObject);
+begin
+  inherited;
+  TPedidosControlador.GetInstance.DataModule.InserirProdutos;
+  lblTotal.Text :=
+             FloatToStr(TPedidosControlador.GetInstance.DataModule.TotalPedido);
+end;
+
+procedure TframPedidos.actCancelarExecute(Sender: TObject);
+begin
+  inherited;
+  TPedidosControlador.GetInstance.DataModule.CancelarPedido;
+  Desabilitar;
+end;
+
+procedure TframPedidos.actNovoExecute(Sender: TObject);
+begin
+  inherited;
+  TPedidosControlador.GetInstance.DataModule.InserirPedido;
+  edtCliente.Enabled := True;
+  edtCliente.SetFocus;
+end;
+
+procedure TframPedidos.actSalvarExecute(Sender: TObject);
+begin
+  inherited;
+  TPedidosControlador.GetInstance.DataModule.GravarPedido;
+end;
+
+procedure TframPedidos.clrbtnApagarClienteClick(Sender: TObject);
+begin
+  inherited;
+  edtCliente.Text.Empty;
+end;
+
+constructor TframPedidos.Create(AOwner: TComponent);
+begin
+  inherited;
+  Titulo := 'Lançamento de Pedidos';
+  Desabilitar;
+end;
+
+procedure TframPedidos.Desabilitar;
+begin
+  edtCliente.Enabled := False;
+  edtcodProduto.Enabled := False;
+  edtQtd.Enabled := False;
+  edtValorUnit.Enabled := False;
+  btnInserirPedidos.Enabled := False;
+  popCliente.Visible := False;
+  popProdutos.Visible := False;
+end;
+
+procedure TframPedidos.edtClienteChange(Sender: TObject);
+begin
+  inherited;
+  popCliente.Visible := True;
+  bndsrcdbGridCliente.DataSet.Active := True;
+  if length(edtCliente.Text)> 3 then
+    TPedidosControlador.GetInstance.DataModule.BuscarCliente(edtCliente.Text);
+end;
+
+procedure TframPedidos.edtcodProdutoChangeTracking(Sender: TObject);
+begin
+  inherited;
+  popProdutos.Visible := True;
+end;
+
+procedure TframPedidos.edtcodProdutoEnter(Sender: TObject);
+begin
+  inherited;
+  edtQtd.SetFocus;
+end;
+
+procedure TframPedidos.edtcodProdutoExit(Sender: TObject);
+begin
+  inherited;
+  edtQtd.SetFocus;
+end;
+
+procedure TframPedidos.edtQtdEnter(Sender: TObject);
+begin
+  inherited;
+  edtValorUnit.SetFocus;
+end;
+
+procedure TframPedidos.edtQtdExit(Sender: TObject);
+begin
+  inherited;
+  edtValorUnit.SetFocus;
+end;
+
+procedure TframPedidos.edtValorUnitEnter(Sender: TObject);
+begin
+  inherited;
+  actAdcionarExecute(Self);
+end;
+
+procedure TframPedidos.FrameKeyDown(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = PM_KEYUP then
+    bndsrcdbGridProdutos.datasource.dataset.prior;
+end;
+
+procedure TframPedidos.FrameKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = PM_KEYDOWN then
+    bndsrcdbGridProdutos.datasource.dataset.next;
+end;
+
+procedure TframPedidos.lstvwClienteItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  inherited;
+  edtCliente.Text := bndsrcdbGridCliente.DataSet.FieldByName('nome').AsString;
+  TPedidosControlador.GetInstance.DataModule.Cliente :=
+              bndsrcdbGridCliente.DataSet.FieldByName('cod_cliente').AsInteger;
+  popCliente.Visible := False;
+  edtcodProduto.Enabled := True;
+  edtQtd.Enabled := True;
+  edtValorUnit.Enabled := True;
+  btnInserirPedidos.Enabled := True;
+  edtcodProduto.SetFocus;
+
+end;
+
+procedure TframPedidos.lstvwProdutosItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  inherited;
+  edtcodProduto.Text :=
+    IntToStr(bndsrcdbLSTProdutos.DataSet.FieldByName('cod_produto').AsInteger);
+end;
+
+procedure TframPedidos.pthMoveAcimaClick(Sender: TObject);
+begin
+  inherited;
+  bndsrcdbGridProdutos.datasource.dataset.prior;
+end;
+
+procedure TframPedidos.pthMoverBaixoClick(Sender: TObject);
+begin
+  inherited;
+  bndsrcdbGridProdutos.datasource.dataset.next;
+end;
+
+end.

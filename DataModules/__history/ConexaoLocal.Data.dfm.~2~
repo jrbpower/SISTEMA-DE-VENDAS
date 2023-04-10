@@ -1,0 +1,6 @@
+inherited dtmdlConexaoLocal: TdtmdlConexaoLocal
+  object conSistemaVendas: TFDConnection
+    Left = 40
+    Top = 16
+  end
+end

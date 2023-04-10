@@ -1,0 +1,28 @@
+inherited dtmdlConexaoLocal: TdtmdlConexaoLocal
+  OldCreateOrder = True
+  Height = 463
+  Width = 595
+  object conSistemaVendas: TFDConnection
+    Params.Strings = (
+      'User_Name=root'
+      'Server=localhost'
+      'Password=v2c1c2c3'
+      'ResultMode=Use'
+      'CharacterSet=cp1251'
+      'Database=sistemavendas'
+      'DriverID=MySQL')
+    LoginPrompt = False
+    Left = 56
+    Top = 16
+  end
+  object FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink
+    VendorLib = 'C:\Users\SOLUC\Downloads\MySQL\libmysql\libmysql.dll'
+    Left = 56
+    Top = 72
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'FMX'
+    Left = 56
+    Top = 132
+  end
+end

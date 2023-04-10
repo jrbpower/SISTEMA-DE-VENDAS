@@ -1,0 +1,124 @@
+unit Pedidos.Data;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Base.Data, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.Client, Datasnap.DBClient, Datasnap.Provider,
+  FireDAC.Comp.DataSet;
+
+type
+  TdtmdlPedidos = class(TdtmdlBase)
+    fdqryCliente: TFDQuery;
+    fdqryProdutos: TFDQuery;
+    fdqryPedidos: TFDQuery;
+    dspCliente: TDataSetProvider;
+    dspProdutos: TDataSetProvider;
+    dspPedidos: TDataSetProvider;
+    fdqryItensPedido: TFDQuery;
+    dsPedidos: TDataSource;
+    cdsPedidos: TClientDataSet;
+    dspItensPedido: TDataSetProvider;
+    cdsItensPedido: TClientDataSet;
+    dsItensPedido: TDataSource;
+    fdmtCache: TFDMemTable;
+    dsCache: TDataSource;
+    fdsAdapter: TFDSchemaAdapter;
+    fdqryProdutoscod_produto: TIntegerField;
+    fdqryProdutosdescricao: TStringField;
+    fdqryProdutospreco_venda: TFMTBCDField;
+    fdqryClientecod_cliente: TIntegerField;
+    fdqryClientenome: TStringField;
+    fdqryClientecidade: TStringField;
+    fdqryClienteuf: TStringField;
+    cdsPedidoscod_nu_pedido: TIntegerField;
+    cdsPedidosdata_emissao: TDateTimeField;
+    cdsPedidoscod_cliente: TIntegerField;
+    cdsPedidosvl_total: TFloatField;
+    cdsPedidoscdsItensPedido: TDataSetField;
+    fdqryPedidoscod_nu_pedido: TIntegerField;
+    fdqryPedidosdata_emissao: TDateTimeField;
+    fdqryPedidoscod_cliente: TIntegerField;
+    fdqryPedidosvl_total: TFloatField;
+    fdqryItensPedidocod_pedido_produto: TFDAutoIncField;
+    fdqryItensPedidocod_nu_pedido: TIntegerField;
+    fdqryItensPedidocod_produto: TIntegerField;
+    fdqryItensPedidoquantidade: TFMTBCDField;
+    fdqryItensPedidovalor_unit: TFMTBCDField;
+    fdqryItensPedidovalor_total: TFMTBCDField;
+    fdqryItensPedidodescricao: TStringField;
+    cdsItensPedidocod_pedido_produto: TAutoIncField;
+    cdsItensPedidocod_nu_pedido: TIntegerField;
+    cdsItensPedidocod_produto: TIntegerField;
+    cdsItensPedidoquantidade: TFMTBCDField;
+    cdsItensPedidovalor_unit: TFMTBCDField;
+    cdsItensPedidovalor_total: TFMTBCDField;
+    cdsItensPedidodescricao: TStringField;
+    procedure fdqryPedidosBeforePost(DataSet: TDataSet);
+  private
+    FCliente: Integer;
+    procedure SetCliente(const Value: Integer);
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure InserirPedido;
+    procedure GravarPedido;
+    procedure BuscarCliente(Nome:string);
+    property Cliente: Integer read FCliente write SetCliente;
+  end;
+
+var
+  dtmdlPedidos: TdtmdlPedidos;
+
+implementation
+
+uses
+  ConexaoLocal.Data;
+
+{%CLASSGROUP 'FMX.Controls.TControl'}
+
+{$R *.dfm}
+
+{ TdtmdlPedidos }
+
+procedure TdtmdlPedidos.BuscarCliente(Nome: string);
+begin
+  fdqryCliente.Close;
+  fdqryCliente.ParamByName('nome').AsString := #39+'%'+Nome+'%'+#39;
+  fdqryCliente.Open;
+end;
+
+procedure TdtmdlPedidos.fdqryPedidosBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+  fdqryPedidosvl_total.AsCurrency := fdqryItensPedidovalor_total.AsCurrency;
+end;
+
+procedure TdtmdlPedidos.GravarPedido;
+begin
+  fdqryPedidos.Post;
+  fdqryPedidos.ApplyUpdates(0);
+end;
+
+procedure TdtmdlPedidos.InserirPedido;
+var
+ NumPedido : Integer;
+begin
+  fdqryPedidos.Close;
+  fdqryPedidos.Open;
+  fdqryPedidos.Last;
+  NumPedido := fdqryPedidoscod_nu_pedido.AsInteger;
+  fdqryPedidos.Insert;
+  fdqryPedidoscod_nu_pedido.AsInteger := NumPedido+1;
+  fdqryPedidosdata_emissao.AsDateTime := Now;
+  fdqryPedidoscod_cliente.AsInteger := Cliente;
+end;
+
+procedure TdtmdlPedidos.SetCliente(const Value: Integer);
+begin
+  FCliente := Value;
+end;
+
+end.

@@ -1,0 +1,25 @@
+unit Pedidos.Data;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Base.Data;
+
+type
+  TdtmdlPedidos = class(TdtmdlBase)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dtmdlPedidos: TdtmdlPedidos;
+
+implementation
+
+{%CLASSGROUP 'FMX.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,82 @@
+inherited framBase1: TframBase1
+  Size.Width = 1035.000000000000000000
+  inherited rctFormTotal: TRectangle
+    Size.Width = 1035.000000000000000000
+    inherited rctHeadTitulo: TRectangle
+      Size.Width = 1035.000000000000000000
+      inherited lblTituloHead: TLabel
+        Size.Width = 1035.000000000000000000
+        TextSettings.Font.StyleExt = {00090000000200000004000000}
+      end
+    end
+    object lytGrid: TLayout
+      Align = Left
+      Position.Y = 41.000000000000000000
+      Size.Width = 385.000000000000000000
+      Size.Height = 392.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object grdPedidos: TGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 385.000000000000000000
+        Size.Height = 392.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 385.000000000000000000
+        Viewport.Height = 392.000000000000000000
+      end
+    end
+    object lytRodaPe: TLayout
+      Align = Bottom
+      Position.Y = 433.000000000000000000
+      Size.Width = 1035.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+    object lytProdutos: TLayout
+      Align = Right
+      Position.X = 408.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 627.000000000000000000
+      Size.Height = 392.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object lblCliente: TLabel
+        Align = Scale
+        StyledSettings = [Family, Size, Style]
+        Position.X = 15.292682647705080000
+        Position.Y = 6.000000000000000000
+        Size.Width = 279.091461181640600000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.FontColor = claWhite
+        Text = 'Nome  do  Cliente'
+        TabOrder = 0
+      end
+      object edtCPFCliente: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 1
+        Position.X = 8.000000000000000000
+        Position.Y = 24.000000000000000000
+        Size.Width = 313.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object grdCliente: TGrid
+        CanFocus = True
+        ClipChildren = True
+        Position.X = 8.000000000000000000
+        Position.Y = 45.000000000000000000
+        Size.Width = 593.000000000000000000
+        Size.Height = 100.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Viewport.Width = 593.000000000000000000
+        Viewport.Height = 100.000000000000000000
+      end
+    end
+  end
+end

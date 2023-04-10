@@ -1,0 +1,62 @@
+object framBase: TframBase
+  Size.Width = 712.000000000000000000
+  Size.Height = 483.000000000000000000
+  Size.PlatformDefault = False
+  object rctFormTotal: TRectangle
+    Align = Client
+    Fill.Kind = Gradient
+    Fill.Gradient.Points = <
+      item
+        Color = xFF2F6EA1
+        Offset = 0.000000000000000000
+      end
+      item
+        Color = claWhite
+        Offset = 1.000000000000000000
+      end>
+    Fill.Gradient.StartPosition.X = 1.000000000000000000
+    Fill.Gradient.StartPosition.Y = 0.211324840784072900
+    Fill.Gradient.StopPosition.Y = 0.788675189018249500
+    Size.Width = 712.000000000000000000
+    Size.Height = 483.000000000000000000
+    Size.PlatformDefault = False
+    object rctHeadTitulo: TRectangle
+      Align = MostTop
+      Fill.Color = xFF2F6EA1
+      Margins.Top = -2.000000000000000000
+      Position.Y = -2.000000000000000000
+      Size.Width = 712.000000000000000000
+      Size.Height = 43.000000000000000000
+      Size.PlatformDefault = False
+      object lblTituloHead: TLabel
+        Align = Contents
+        StyledSettings = [Family]
+        Size.Width = 712.000000000000000000
+        Size.Height = 43.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 26.000000000000000000
+        TextSettings.Font.StyleExt = {00090000000200000004000000}
+        TextSettings.FontColor = claWhite
+        TextSettings.HorzAlign = Center
+        Text = 'Titulo'
+        TabOrder = 0
+      end
+    end
+  end
+  object rctnglOpaco: TRectangle
+    Align = Client
+    Opacity = 0.699999988079071100
+    Size.Width = 729.000000000000000000
+    Size.Height = 489.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+  end
+  object actnlstBase: TActionList
+    Left = 80
+    Top = 80
+    object actnSair: TAction
+      Text = 'Sair'
+      OnExecute = actnSairExecute
+    end
+  end
+end
