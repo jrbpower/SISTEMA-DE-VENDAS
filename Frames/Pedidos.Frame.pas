@@ -11,7 +11,7 @@ uses
   Data.Bind.EngExt, Fmx.Bind.DBEngExt, Fmx.Bind.Grid, System.Bindings.Outputs,
   Fmx.Bind.Editors, Data.Bind.Grid, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
-  FMX.ListBox;
+  FMX.ListBox, Data.Bind.Controls, Fmx.Bind.Navigator;
 
 type
   TframPedidos = class(TframBase)
@@ -60,10 +60,7 @@ type
     lnkctlprpIDProdutos: TLinkFillControlToProperty;
     schbtnBuscarProd: TSearchEditButton;
     schbtnBuscarClient: TSearchEditButton;
-    procedure FrameKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
-      Shift: TShiftState);
-    procedure FrameKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
-      Shift: TShiftState);
+    btnExcluirProduto: TButton;
     procedure actNovoExecute(Sender: TObject);
     procedure actAdcionarExecute(Sender: TObject);
     procedure actCancelarExecute(Sender: TObject);
@@ -79,11 +76,11 @@ type
       const Item: TListBoxItem);
     procedure lstbxProdutosItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
-    procedure edtQtdExit(Sender: TObject);
-    procedure edtQtdChange(Sender: TObject);
     procedure schbtnBuscarProdClick(Sender: TObject);
     procedure schbtnBuscarClientClick(Sender: TObject);
-    procedure FrameEnter(Sender: TObject);
+    procedure btnExcluirProdutoClick(Sender: TObject);
+    procedure grdPedidosCellClick(const Column: TColumn; const Row: Integer);
+    procedure bndsrcdbGridProdutosSubDataSourceStateChange(Sender: TObject);
   private
     FStatus :string;
     { Private declarations }
@@ -116,13 +113,25 @@ begin
                                                    StrToCurr(edtValorUnit.Text);
     TPedidosControlador.GetInstance.DataModule.InserirProdutos;
     lblTotal.Text :=
-      FormatFloat('#.##',TPedidosControlador.GetInstance.DataModule.TotalPedido);
+      FormatFloat('#.00',TPedidosControlador.GetInstance.DataModule.TotalPedido);
     limparCampos;
   end
   else
-  if Fstatus = 'Editar' then
+  if bndsrcdbGridProdutos.DataSet.State = dsEdit then
   begin
+    bndsrcdbGridProdutos.DataSet.FieldByName('valor_total').AsFloat :=
+      bndsrcdbGridProdutos.DataSet.FieldByName('quantidade').AsFloat *
+        bndsrcdbGridProdutos.DataSet.FieldByName('valor_unit').AsFloat;
+
+    TPedidosControlador.GetInstance.DataModule.IdProdPed :=
+      bndsrcdbGridProdutos.DataSet.FieldByName('cod_pedido_produto').AsInteger;
+
     bndsrcdbGridProdutos.DataSet.Post;
+    TPedidosControlador.GetInstance.DataModule.fdqryProdutosGrid.ApplyUpdates(0);
+    TPedidosControlador.GetInstance.DataModule.BuscarValorTotal;
+    lblTotal.Text :=
+      FormatFloat('#.00',
+                       TPedidosControlador.GetInstance.DataModule.TotalPedido);
   end;
 
 
@@ -153,7 +162,50 @@ begin
   Desabilitar;
 end;
 
-procedure TframPedidos.clrbtnApagarClienteClick(Sender: TObject);
+procedure TframPedidos.bndsrcdbGridProdutosSubDataSourceStateChange(
+  Sender: TObject);
+begin
+  inherited;
+  if bndsrcdbGridProdutos.DataSet.State = dsEdit then
+     FStatus := 'Editar'
+end;
+
+procedure TframPedidos.btnExcluirProdutoClick(Sender: TObject);
+begin
+  inherited;
+  if FStatus = 'Excluir' then
+  begin
+
+    MessageDlg('Tem Certeza que Deseja Excluir?',
+      System.UITypes.TMsgDlgType.mtInformation,
+      [System.UITypes.TMsgDlgBtn.mbYes,
+      System.UITypes.TMsgDlgBtn.mbNo
+    ], 0,
+    procedure(const AResult: System.UITypes.TModalResult)
+    begin
+      case AResult of
+        mrYES:
+        begin
+          TPedidosControlador.GetInstance.DataModule.IdProdPed :=
+            bndsrcdbGridProdutos.DataSet.FieldByName('cod_pedido_produto').AsInteger;
+          TPedidosControlador.GetInstance.DataModule.ExcluirProduto;
+          TPedidosControlador.GetInstance.DataModule.AtualizarGrid;
+          TPedidosControlador.GetInstance.DataModule.BuscarValorTotal;
+          lblTotal.Text :=
+            FormatFloat('#.00',
+                       TPedidosControlador.GetInstance.DataModule.TotalPedido);
+
+        end;
+      end;
+    end);
+  end
+  else
+    MessageDlg('Tem que Selecionar o um item na Grid!',
+      TMsgDlgType.mtwarning,[TMsgDlgBtn.mbok],0);
+
+end;
+
+Procedure TframPedidos.clrbtnApagarClienteClick(Sender: TObject);
 begin
   inherited;
   edtCliente.Text.Empty;
@@ -195,19 +247,7 @@ end;
 
 procedure TframPedidos.edtcodProdutoExit(Sender: TObject);
 begin
-  inherited;
-  if bndsrcdbLSTProdutos.DataSet.FieldByName('preco_venda').AsFloat <> 0 then
-    edtValorUnit.Text :=
-      FormatFloat('#.##',
-        bndsrcdbLSTProdutos.DataSet.FieldByName('preco_venda').AsCurrency);
-
   edtQtd.SetFocus;
-end;
-
-procedure TframPedidos.edtQtdChange(Sender: TObject);
-begin
-  inherited;
-  edtValorUnit.SetFocus;
 end;
 
 procedure TframPedidos.edtQtdEnter(Sender: TObject);
@@ -216,45 +256,11 @@ begin
   edtValorUnit.SetFocus;
 end;
 
-procedure TframPedidos.edtQtdExit(Sender: TObject);
+procedure TframPedidos.grdPedidosCellClick(const Column: TColumn;
+  const Row: Integer);
 begin
   inherited;
-  edtValorUnit.SetFocus;
-end;
-
-procedure TframPedidos.FrameEnter(Sender: TObject);
-begin
-  inherited;
-  if grdPedidos.IsFocused then
-  begin
-    FStatus := 'Editar';
-    edtcodProduto.Text :=
-    IntToStr(bndsrcdbGridProdutos.DataSet.FieldByName('cod_produto').AsInteger);
-  end;
-end;
-
-procedure TframPedidos.FrameKeyDown(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
-begin
-  inherited;
-  bndsrcdbGridProdutos.datasource.dataset.Next;
-
-  if key = vkReturn then
-  begin
-    FStatus := 'Editar';
-  end;
-end;
-
-procedure TframPedidos.FrameKeyUp(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
-begin
-  inherited;
-  bndsrcdbGridProdutos.datasource.dataset.Prior;
-
-  if key = vkReturn then
-  begin
-    FStatus := 'Editar';
-  end;
+  FStatus := 'Excluir';
 end;
 
 procedure TframPedidos.limparCampos;
@@ -283,10 +289,17 @@ procedure TframPedidos.lstbxProdutosItemClick(const Sender: TCustomListBox;
   const Item: TListBoxItem);
 begin
   inherited;
+  edtValorUnit.Text := EmptyStr;
   edtcodProduto.Text := lblIDProduto.Text;
   TPedidosControlador.GetInstance.DataModule.CodigoProduto :=
                                                     StrToInt(lblIDProduto.Text);
+  edtValorUnit.Text :=
+      FormatFloat('#.00',
+        bndsrcdbLSTProdutos.DataSet.FieldByName('preco_venda').AsFloat);
   popProdutos.Visible := False;
+  FStatus := 'Inserir';
+  edtQtd.text := '1';
+  edtQtd.SetFocus;
 end;
 
 procedure TframPedidos.pthMoveAcimaClick(Sender: TObject);
@@ -304,15 +317,31 @@ end;
 procedure TframPedidos.schbtnBuscarClientClick(Sender: TObject);
 begin
   inherited;
-  popCliente.Visible := True;
-  TPedidosControlador.GetInstance.DataModule.BuscarCliente(edtCliente.Text);
+
+  if Length(edtCliente.Text) > 0 then
+  begin
+    TPedidosControlador.GetInstance.DataModule.BuscarCliente(edtCliente.Text);
+    popCliente.Visible := True;
+  end
+  else
+  MessageDlg('Tem que Digitar ou codigo ou nome!',
+                                  TMsgDlgType.mtwarning,[TMsgDlgBtn.mbok],0);
 end;
 
 procedure TframPedidos.schbtnBuscarProdClick(Sender: TObject);
 begin
   inherited;
-  popProdutos.Visible := True;
-  TPedidosControlador.GetInstance.DataModule.BuscarProduto(edtcodProduto.text);
+
+  if Length(edtcodProduto.text) > 0 then
+  begin
+    TPedidosControlador.GetInstance.DataModule.BuscarProduto(
+                                                            edtcodProduto.text);
+    popProdutos.Visible := True;
+  end
+  else
+    MessageDlg('Tem que Digitar ou codigo ou nome!',
+                                   TMsgDlgType.mtwarning,[TMsgDlgBtn.mbok],0);
+
 end;
 
 end.

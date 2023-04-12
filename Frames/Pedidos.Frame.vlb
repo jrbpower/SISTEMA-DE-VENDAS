@@ -2,42 +2,42 @@
 Coordinates=68,77,72,33
 
 [lytGrid]
-Coordinates=778,867,47,33
+Coordinates=405,627,47,33
 
 [lytProdutos]
-Coordinates=307,867,71,33
+Coordinates=478,627,71,33
 
 [actnSair]
 Coordinates=146,151,54,33
 
 [rctFormTotal]
-Coordinates=1001,790,77,33
+Coordinates=575,627,77,33
 
 [lytRodaPe]
-Coordinates=217,867,64,33
+Coordinates=678,627,64,33
 
 [grdPedidos]
-Coordinates=253,121,70,141
+Coordinates=255,10,70,123
 Visible=True
 
 [lblCliente]
-Coordinates=211,790,60,51
+Coordinates=330,550,60,51
 
 [lblTituloHead]
-Coordinates=412,713,79,51
+Coordinates=525,550,79,51
 
 [rctHeadTitulo]
-Coordinates=111,867,80,33
+Coordinates=336,704,80,33
 
 [rctnglOpaco]
-Coordinates=10,867,75,33
+Coordinates=678,704,75,33
 
 []
-Coordinates=106,52,70,51
+Coordinates=245,193,90,51
 Visible=True
 
 [bndsrcdbGridProdutos]
-Coordinates=10,105,155,231
+Coordinates=10,20,155,213
 
 [dtmdlPedidos.fdqryCliente]
 Coordinates=420,170,145,33
@@ -48,13 +48,13 @@ Coordinates=356,231,156,33
 Visible=False
 
 [dtmdlPedidos.fdqryItensPedido]
-Coordinates=523,510,169,159
+Coordinates=518,270,169,159
 
 [dtmdlPedidos.fdqryPedidos]
-Coordinates=718,510,151,123
+Coordinates=713,270,151,123
 
 [dtmdlPedidos.fdmtCache]
-Coordinates=640,713,138,51
+Coordinates=10,550,138,51
 
 [dtmdlPedidos.dsCache]
 Coordinates=349,216,128,33
@@ -63,56 +63,56 @@ Coordinates=349,216,128,33
 Coordinates=384,178,129,33
 
 [bndsrcdbGridCliente]
-Coordinates=714,28,126,141
+Coordinates=366,288,126,141
 
 [clrbtnApagarCliente]
-Coordinates=640,867,112,33
+Coordinates=768,627,112,33
 
 [schbtnBuscarCliente]
-Coordinates=497,867,117,33
+Coordinates=193,704,117,33
 
 [edtCliente]
-Coordinates=10,790,64,51
+Coordinates=315,627,64,51
 
 [btnNovoPedido]
-Coordinates=598,790,90,51
+Coordinates=199,627,90,51
 
 [btnCancelarPedido]
-Coordinates=918,713,108,51
+Coordinates=838,473,108,51
 
 [btnGravarPedido]
-Coordinates=517,713,97,51
+Coordinates=374,473,97,51
 
 [pthMoveAcima]
-Coordinates=10,713,87,51
+Coordinates=86,627,87,51
 
 [pthMoverBaixo]
-Coordinates=804,713,88,51
+Coordinates=858,550,88,51
 
 [edtValorUnit]
-Coordinates=251,433,75,51
+Coordinates=630,550,75,51
 
 [btnInserirPedidos]
-Coordinates=297,790,101,51
+Coordinates=731,550,101,51
 
 [lblCodProduto]
-Coordinates=100,790,85,51
+Coordinates=83,473,85,51
 
 [lblQuantidade]
-Coordinates=123,713,83,51
+Coordinates=416,550,83,51
 
 [edtcodProduto]
-Coordinates=245,10,87,51
+Coordinates=497,473,87,51
 Visible=True
 
 [edtQtd]
-Coordinates=265,322,47,51
+Coordinates=10,473,47,51
 
 [lblValorUnit]
-Coordinates=424,790,72,51
+Coordinates=610,473,72,51
 
 [bndsrcdbLSTProdutos]
-Coordinates=362,537,135,123
+Coordinates=713,37,135,123
 
 [actNovo]
 Coordinates=171,141,54,33
@@ -127,38 +127,38 @@ Coordinates=171,141,60,33
 Coordinates=604,564,73,33
 
 [pthSair]
-Coordinates=334,713,52,51
+Coordinates=194,473,52,51
 
 [lblTotal]
-Coordinates=522,790,50,51
+Coordinates=10,627,50,51
 
 [popProdutos]
-Coordinates=897,790,78,33
+Coordinates=442,704,78,33
 
 [lblValorTotal]
-Coordinates=232,713,76,51
+Coordinates=272,473,76,51
 
 [popCliente]
-Coordinates=404,867,67,33
+Coordinates=906,627,67,33
 
 [lytTotal]
-Coordinates=714,790,50,33
+Coordinates=117,704,50,33
 
 [lytCursorGrid]
-Coordinates=790,790,81,33
+Coordinates=10,704,81,33
 
 [lstbxCliente]
-Coordinates=518,10,116,177
+Coordinates=170,270,116,177
 Visible=True
 
 [lblCodCliente]
-Coordinates=358,73,80,51
+Coordinates=10,333,80,51
 
 [lblIDProduto]
-Coordinates=10,573,76,51
+Coordinates=361,73,76,51
 
 [lstbxProdutos]
-Coordinates=166,510,116,177
+Coordinates=517,10,116,177
 
 [dtmdlPedidos.fdqryProdutosGrid]
 Coordinates=603,640,177,33
@@ -168,8 +168,14 @@ Visible=False
 Coordinates=74,203,155,33
 
 [schbtnBuscarProd]
-Coordinates=0,0,106,33
+Coordinates=546,704,106,33
 
 [schbtnBuscarClient]
-Coordinates=125,1,111,33
+Coordinates=779,704,111,33
+
+[dtmdlPedidos.fdqryAux]
+Coordinates=174,550,130,51
+
+[btnExcluirProduto]
+Coordinates=708,473,104,51
 
