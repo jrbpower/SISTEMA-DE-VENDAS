@@ -1,35 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2023/04/07 12:25:08.000.831,=C:\Projetos\Unit1.pas</Transaction>
-    <Transaction>2023/04/07 12:31:57.000.010,C:\Sistema de Vendas Teste\Unit1.fmx=C:\Projetos\Unit1.fmx</Transaction>
-    <Transaction>2023/04/07 12:31:57.000.010,C:\Sistema de Vendas Teste\Unit1.pas=C:\Projetos\Unit1.pas</Transaction>
-    <Transaction>2023/04/07 12:33:08.000.804,C:\Sistema de Vendas Teste\SistemasVendas.dproj=C:\Projetos\Project1.dproj</Transaction>
-    <Transaction>2023/04/07 12:33:19.000.913,C:\Sistema de Vendas Teste\SistemaDeVendas.dproj=C:\Sistema de Vendas Teste\SistemasVendas.dproj</Transaction>
-    <Transaction>2023/04/07 12:35:17.000.272,=C:\Sistema de Vendas Teste\Formularios\Principal.ADM.Form.pas</Transaction>
-    <Transaction>2023/04/07 12:35:34.000.149,C:\Sistema de Vendas Teste\Unit1.pas=</Transaction>
-    <Transaction>2023/04/07 12:42:06.000.737,=C:\Sistema de Vendas Teste\DataModules\Base.Data.pas</Transaction>
-    <Transaction>2023/04/07 12:42:06.000.471,=C:\Sistema de Vendas Teste\DataModules\Aplicacao.Data.pas</Transaction>
-    <Transaction>2023/04/07 12:42:14.000.656,=C:\Sistema de Vendas Teste\Frames\Base.Frame.pas</Transaction>
-    <Transaction>2023/04/07 12:42:25.000.356,=C:\Sistema de Vendas Teste\Classes\Controlador.pas</Transaction>
-    <Transaction>2023/04/07 12:42:25.000.288,=C:\Sistema de Vendas Teste\Classes\Controlador.Frame.pas</Transaction>
-    <Transaction>2023/04/07 13:03:51.000.355,C:\Sistema de Vendas Teste\DataModules\Aplicacao.Data.pas=</Transaction>
-    <Transaction>2023/04/07 13:52:17.000.942,=C:\Sistema de Vendas Teste\Unit1.pas</Transaction>
-    <Transaction>2023/04/07 14:05:29.000.130,C:\Sistema de Vendas Teste\Frames\TelaPedido.Frame.pas=C:\Sistema de Vendas Teste\Unit1.pas</Transaction>
-    <Transaction>2023/04/07 14:05:29.000.130,C:\Sistema de Vendas Teste\Frames\TelaPedido.Frame.fmx=C:\Sistema de Vendas Teste\Unit1.fmx</Transaction>
-    <Transaction>2023/04/07 14:07:29.000.458,=C:\Sistema de Vendas Teste\Unit1.pas</Transaction>
-    <Transaction>2023/04/07 14:09:30.000.146,C:\Sistema de Vendas Teste\Classes\TelaPedidos.Controlador.pas=C:\Sistema de Vendas Teste\Unit1.pas</Transaction>
-    <Transaction>2023/04/07 14:12:28.000.590,=C:\Sistema de Vendas Teste\Unit1.pas</Transaction>
-    <Transaction>2023/04/07 14:17:44.000.655,C:\Sistema de Vendas Teste\DataModules\ConexaoLocal.Data.pas=C:\Sistema de Vendas Teste\Unit1.pas</Transaction>
-    <Transaction>2023/04/07 14:17:44.000.655,C:\Sistema de Vendas Teste\DataModules\ConexaoLocal.Data.dfm=C:\Sistema de Vendas Teste\Unit1.dfm</Transaction>
-    <Transaction>2023/04/07 14:18:38.000.203,=C:\Sistema de Vendas Teste\Unit1.pas</Transaction>
-    <Transaction>2023/04/07 14:19:52.000.930,C:\Sistema de Vendas Teste\Frames\Pedidos.Frame.pas=C:\Sistema de Vendas Teste\Frames\TelaPedido.Frame.pas</Transaction>
-    <Transaction>2023/04/07 14:19:52.000.930,C:\Sistema de Vendas Teste\Frames\Pedidos.Frame.fmx=C:\Sistema de Vendas Teste\Frames\TelaPedido.Frame.fmx</Transaction>
-    <Transaction>2023/04/07 14:20:10.000.618,C:\Sistema de Vendas Teste\Classes\Pedidos.Controlador.pas=C:\Sistema de Vendas Teste\Classes\TelaPedidos.Controlador.pas</Transaction>
-    <Transaction>2023/04/07 14:21:35.000.831,C:\Sistema de Vendas Teste\DataModules\Pedidos.Data.dfm=C:\Sistema de Vendas Teste\Unit1.dfm</Transaction>
-    <Transaction>2023/04/07 14:21:35.000.831,C:\Sistema de Vendas Teste\DataModules\Pedidos.Data.pas=C:\Sistema de Vendas Teste\Unit1.pas</Transaction>
-    <Transaction>2023/04/09 10:31:24.660,C:\Sistema de Vendas Teste\Formularios\Principal.Form.fmx=C:\Sistema de Vendas Teste\Formularios\Principal.ADM.Form.fmx</Transaction>
-    <Transaction>2023/04/09 10:31:24.660,C:\Sistema de Vendas Teste\Formularios\Principal.Form.pas=C:\Sistema de Vendas Teste\Formularios\Principal.ADM.Form.pas</Transaction>
+    <Transaction>2023/04/07 12:31:57.000.010,C:\Projetos\Unit1.fmx=C:\Sistema de Vendas Teste\Unit1.fmx</Transaction>
+    <Transaction>2023/04/07 12:33:08.000.804,C:\Projetos\Project1.dproj=C:\Sistema de Vendas Teste\SistemasVendas.dproj</Transaction>
+    <Transaction>2023/04/07 12:33:19.000.913,C:\Sistema de Vendas Teste\SistemasVendas.dproj=C:\Sistema de Vendas Teste\SistemaDeVendas.dproj</Transaction>
+    <Transaction>2023/04/07 14:05:29.000.130,C:\Sistema de Vendas Teste\Unit1.fmx=C:\Sistema de Vendas Teste\Frames\TelaPedido.Frame.fmx</Transaction>
+    <Transaction>2023/04/07 14:17:44.000.655,C:\Sistema de Vendas Teste\Unit1.dfm=C:\Sistema de Vendas Teste\DataModules\ConexaoLocal.Data.dfm</Transaction>
+    <Transaction>2023/04/07 14:19:52.000.930,C:\Sistema de Vendas Teste\Frames\TelaPedido.Frame.pas=C:\Sistema de Vendas Teste\Frames\Pedidos.Frame.pas</Transaction>
+    <Transaction>2023/04/07 14:19:52.000.930,C:\Sistema de Vendas Teste\Frames\TelaPedido.Frame.fmx=C:\Sistema de Vendas Teste\Frames\Pedidos.Frame.fmx</Transaction>
+    <Transaction>2023/04/07 14:20:10.000.618,C:\Sistema de Vendas Teste\Classes\TelaPedidos.Controlador.pas=C:\Sistema de Vendas Teste\Classes\Pedidos.Controlador.pas</Transaction>
+    <Transaction>2023/04/07 14:21:35.000.831,C:\Sistema de Vendas Teste\Unit1.dfm=C:\Sistema de Vendas Teste\DataModules\Pedidos.Data.dfm</Transaction>
+    <Transaction>2023/04/09 10:31:24.000.660,C:\Sistema de Vendas Teste\Formularios\Principal.ADM.Form.fmx=C:\Sistema de Vendas Teste\Formularios\Principal.Form.fmx</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5"/>
