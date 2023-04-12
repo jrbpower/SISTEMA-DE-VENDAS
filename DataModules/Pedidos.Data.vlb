@@ -47,7 +47,7 @@ Coordinates=17,394,68,33
 Coordinates=483,417,107,33
 
 []
-Coordinates=215,152,200,33
+Coordinates=925,105,180,33
 
 [fdqryPedidosvl_total]
 Coordinates=324,152,116,33
@@ -80,16 +80,13 @@ Coordinates=672,313,208,33
 Coordinates=119,552,161,33
 
 [fdqryProdutosGrid]
-Coordinates=10,10,106,213
+Coordinates=10,10,106,195
 
 [fdqryProdutosGridvalor_unit]
 Coordinates=925,1,155,33
 
 [fdqryProdutosGridpreco_venda]
 Coordinates=925,53,170,33
-
-[fdqryProdutosGridcod_produto_1]
-Coordinates=925,105,180,33
 
 [fdqryItensPedidovalor_unit]
 Coordinates=329,256,147,33
@@ -108,4 +105,7 @@ Coordinates=716,365,150,33
 
 [fdqryItensPedidocod_nu_pedido]
 Coordinates=697,410,174,33
+
+[fdqryAux]
+Coordinates=264,222,59,51
 

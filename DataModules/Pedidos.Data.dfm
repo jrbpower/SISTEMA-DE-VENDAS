@@ -143,6 +143,7 @@ inherited dtmdlPedidos: TdtmdlPedidos
       FieldName = 'cod_pedido_produto'
       Origin = 'cod_pedido_produto'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object fdqryItensPedidocod_nu_pedido: TIntegerField
       AutoGenerateValue = arDefault
@@ -197,6 +198,8 @@ inherited dtmdlPedidos: TdtmdlPedidos
     Top = 208
   end
   object fdqryProdutosGrid: TFDQuery
+    OnCalcFields = fdqryProdutosGridCalcFields
+    CachedUpdates = True
     Connection = dtmdlConexaoLocal.conSistemaVendas
     SQL.Strings = (
       'SELECT '
@@ -223,6 +226,7 @@ inherited dtmdlPedidos: TdtmdlPedidos
       FieldName = 'cod_pedido_produto'
       Origin = 'cod_pedido_produto'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object fdqryProdutosGridcod_nu_pedido: TIntegerField
       AutoGenerateValue = arDefault
@@ -245,6 +249,7 @@ inherited dtmdlPedidos: TdtmdlPedidos
       AutoGenerateValue = arDefault
       FieldName = 'valor_unit'
       Origin = 'valor_unit'
+      currency = True
       Precision = 20
       Size = 2
     end
@@ -252,15 +257,9 @@ inherited dtmdlPedidos: TdtmdlPedidos
       AutoGenerateValue = arDefault
       FieldName = 'valor_total'
       Origin = 'valor_total'
+      currency = True
       Precision = 20
       Size = 2
-    end
-    object fdqryProdutosGridcod_produto_1: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'cod_produto_1'
-      Origin = 'cod_produto'
-      ProviderFlags = []
-      ReadOnly = True
     end
     object fdqryProdutosGriddescricao: TStringField
       AutoGenerateValue = arDefault
@@ -279,5 +278,10 @@ inherited dtmdlPedidos: TdtmdlPedidos
       Precision = 20
       Size = 2
     end
+  end
+  object fdqryAux: TFDQuery
+    Connection = dtmdlConexaoLocal.conSistemaVendas
+    Left = 408
+    Top = 72
   end
 end
