@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.StdCtrls, FMX.Effects, FMX.Layouts, FMX.MultiView,
-  FMX.Controls.Presentation, FMX.Ani, FrameStand, SubjectStand, FormStand,
+  FMX.Controls.Presentation, FMX.Ani,
   System.Actions, FMX.ActnList, FMX.TabControl, FMX.DateTimeCtrls,
   Winapi.Windows, Base.Frame, DateUtils, Midaslib;
 
@@ -31,8 +31,6 @@ type
     ActionList1: TActionList;
     acLogin: TChangeTabAction;
     acConfig: TChangeTabAction;
-    fm1: TFormStand;
-    fs1: TFrameStand;
     mltvwMenu: TMultiView;
     pnMenu: TRectangle;
     sbxMenu: TVertScrollBox;

@@ -5,9 +5,10 @@ object frmPrincipal: TfrmPrincipal
   Caption = 'SISTEMA DE VENDAS FIRE-X'
   ClientHeight = 801
   ClientWidth = 1600
-  FormStyle = StayOnTop
+  Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
+  FormFactor.Orientations = [InvertedPortrait, InvertedLandscape]
   FormFactor.Devices = [Desktop]
   OnShow = FormShow
   DesignerMasterStyle = 0
@@ -34,16 +35,16 @@ object frmPrincipal: TfrmPrincipal
         object pnMenu: TRectangle
           Align = Client
           Fill.Color = xFF8D9EE1
-          Size.Width = 297.000000000000000000
+          Size.Width = 72.000000000000000000
           Size.Height = 696.000000000000000000
           Size.PlatformDefault = False
           object sbxMenu: TVertScrollBox
             Align = Client
-            Size.Width = 297.000000000000000000
+            Size.Width = 72.000000000000000000
             Size.Height = 696.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
-            Viewport.Width = 297.000000000000000000
+            Viewport.Width = 72.000000000000000000
             Viewport.Height = 696.000000000000000000
             object rtTelaPedidos: TRectangle
               Align = Top
@@ -53,7 +54,7 @@ object frmPrincipal: TfrmPrincipal
               Margins.Right = 8.000000000000000000
               Position.X = 8.000000000000000000
               Position.Y = 6.000000000000000000
-              Size.Width = 281.000000000000000000
+              Size.Width = 56.000000000000000000
               Size.Height = 50.000000000000000000
               Size.PlatformDefault = False
               Stroke.Color = xB45E6F7F
@@ -71,13 +72,12 @@ object frmPrincipal: TfrmPrincipal
                 Margins.Top = 8.000000000000000000
                 Margins.Right = 8.000000000000000000
                 Margins.Bottom = 8.000000000000000000
-                Size.Width = 199.000000000000000000
+                Size.Width = 0.000000000000000000
                 Size.Height = 34.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Size = 18.000000000000000000
                 TextSettings.FontColor = claWhite
                 Text = 'Tela de Pedidos'
-                TabOrder = 0
               end
               object Layout5: TLayout
                 Align = Left
@@ -145,7 +145,7 @@ object frmPrincipal: TfrmPrincipal
               object Layout7: TLayout
                 Align = Right
                 Locked = True
-                Position.X = 265.000000000000000000
+                Position.X = 40.000000000000000000
                 Size.Width = 16.000000000000000000
                 Size.Height = 50.000000000000000000
                 Size.PlatformDefault = False
@@ -234,7 +234,6 @@ object frmPrincipal: TfrmPrincipal
           Text = 'Sistema de Vendas Fire-X'
           ParentShowHint = False
           ShowHint = False
-          TabOrder = 0
         end
         object btnMenu: TSpeedButton
           Align = Left
@@ -311,7 +310,6 @@ object frmPrincipal: TfrmPrincipal
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.FontColor = claWhite
           Visible = False
-          TabOrder = 1
         end
       end
       object spdbtnSair: TSpeedButton
@@ -425,25 +423,5 @@ object frmPrincipal: TfrmPrincipal
     object acConfig: TChangeTabAction
       Category = 'Tab'
     end
-  end
-  object fm1: TFormStand
-    AnimationShow = 'OnShow*'
-    AnimationHide = 'OnHide*'
-    CommonActionPrefix = 'ca_'
-    DefaultHideAndCloseDeferTimeMS = 100
-    DefaultStyleName = 'formstand'
-    DefaultStandName = 'formstand'
-    Left = 48
-    Top = 368
-  end
-  object fs1: TFrameStand
-    AnimationShow = 'OnShow*'
-    AnimationHide = 'OnHide*'
-    CommonActionPrefix = 'ca_'
-    DefaultHideAndCloseDeferTimeMS = 100
-    DefaultStyleName = 'framestand'
-    DefaultStandName = 'framestand'
-    Left = 48
-    Top = 320
   end
 end
